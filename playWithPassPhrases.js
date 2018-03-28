@@ -1,100 +1,39 @@
 function playPass(s, n) {
+    console.log(s, n)
     s = s.split("");
-    console.log(s);
-    var newLetter = "";
-    var newWord = [];
     var alphabet = 'abcdefghIjkLmnopqrstuvwxyzabcdefghIjkLmnopqrstuvwxyz'.toUpperCase().split("");
+    let spaces = [];
+    for (var j=0; j<s.length;j++){
+        if (s[j] === " "){
+            spaces.push(j)
+        }
+    }
+    console.log(spaces);
+    let changedLetters = s.map(function (letter){
+        if (letter === "0" || letter === "1" || letter === "2" || letter === "3" || letter === "4" || letter === "5" || letter === "6" || letter === "7" || letter === "8" || letter === "9"){
+            let result = 9 - Number(letter);
+            return result.toString()
+        }
+        else if (letter === '!' || letter === " " || letter === '.' || letter === '\''){
+            return letter;
+        }
+        return alphabet[alphabet.indexOf(letter)+n]
+    });
+    let letterSized = [];
 
-    /*for (var j=0;j<s.length;j++){
-        var single = s[j];
-        var twoIndex = alphabet.indexOf(single);
-        index.push(twoIndex);
-    }*/
-    //zastępujemy kod powyżej funkcją map:
-    //var oneIndex = s.map(function (t) { return alphabet.indexOf(t) })
-    var oneIndex = s.map((t) => alphabet.indexOf(t))
-
-
-    console.log("oneIndex = " + oneIndex);
-    var nIndex = oneIndex.map(function (x) {
-        if (x === -1) {
-            return x = " ";
+    console.log(changedLetters)
+    for (let i=0; i<changedLetters.length;i++){
+        if (i % 2 === 0){
+            letterSized.push(changedLetters[i])
         }
         else {
-            return x+n;
-        }
-    });
-    console.log("new index " + nIndex);
-
-    for (var i=0; i<nIndex.length<i++;){
-        newLetter = alphabet[nIndex[i]];
-        newWord.push(newLetter);
-    }
-
-    /*var finalWord = [];
-    for (g=0;g<nIndex.length;g++){
-        var letterNew = alphabet[nIndex[g]];
-        finalWord.push(letterNew);
-    }
-    console.log(finalWord);*/
-    //zastępujemy kod powyżej funkcją map:
-    var finalWord = nIndex.map(function (t) { return alphabet[t] });
-    console.log("finalword " + finalWord);
-    for (var r=0;r<finalWord.length;r++){
-        if (finalWord[r] === undefined){
-            finalWord[r] = s[r];
+            letterSized.push(changedLetters[i].toLowerCase())
         }
     }
-    console.log("finalword 2: " + finalWord);
-    console.log(typeof finalWord[10]);
-    var mySet = ['0','1','2','3','4','5','6','7','8','9','!'];
-    var isNumber = finalWord.filter(function (t) {
-       return mySet.includes(t)});
-    console.log("isNumber: " + isNumber);
-    var toNumber = isNumber.map(function (t) { return parseInt(t) });
+    console.log('afterloop: ', letterSized);
 
-    var changedNumbers = toNumber.map(function (t) { return 9-t });
-    for (i=0;i<changedNumbers.length;i++){
-        if (isNaN(changedNumbers[i])){
-            changedNumbers[i] = mySet[10]
-            console.log(changedNumbers)
-        }
-        else{
-            changedNumbers[i] = changedNumbers[i]
-        }
-    }
-    console.log('changenumbers: ' + changedNumbers);
-    var modifiedArray = finalWord.map(x => x)
-    /*var listedNumbers = changedNumbers.map(function (t) { return t })
-    console.log(listedNumbers)
-    modifiedArray.splice(modifiedArray.indexOf(isNumber[0]),isNumber.length);
-    modifiedArray = modifiedArray.concat(listedNumbers);*/
-    console.log("xWord: ", modifiedArray)
-    modifiedArray= modifiedArray.toString().replace(/,/g,"")
-    console.log("xWord: ", modifiedArray)
-    var caseArray = [];
-     for (i=0;i<modifiedArray.length;i++){
-         if (i % 2 === 0){
-             caseArray.push(modifiedArray[i].toUpperCase());
-             //console.log('parzysta:', caseArray)
-         }
-         else {
-             caseArray.push(modifiedArray[i].toLowerCase());
-             //console.log('nieparzysta:', caseArray)
+    let letterSized2 = letterSized.reverse().join('')
+    console.log(letterSized2)
 
-         }
-     }
 
-    caseArray = caseArray.reverse().join('');
-    console.log(caseArray)
-    console.log(typeof caseArray[0])
-    var arrayIndex = [];
-    for (i=0;i<caseArray.length;i++){
-        arrayIndex.push(caseArray.indexOf(caseArray.match(/\d+/)))
-    }
-    console.log(arrayIndex)
-    var listedNumbers = changedNumbers.map(function (t) { return t })
-    console.log(listedNumbers)
-
-}
-playPass("IN 2012 TWO CAMBRIDGE UNIVERSITY RESEARCHERS ANALYSED PASSPHRASES FROM THE AMAZON PAY SYSTEM", 20);
+} playPass('TO BE HONEST WITH YOU I DON\'T USE THIS TEXT TOOL TOO OFTEN BUT HEY... MAYBE YOUR NEEDS ARE DIFFERENT.', 5)
